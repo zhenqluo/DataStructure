@@ -1,5 +1,7 @@
 package com.chapter4.linkedlist;
 
+import java.util.Stack;
+
 public class SigleLinkedListDemo {
     public static void main(String[] args) {
         HeroNode hero1 = new HeroNode(1,"宋江","及时雨");
@@ -14,8 +16,10 @@ public class SigleLinkedListDemo {
         sigleLinkedList.addByOrder(hero3);
         sigleLinkedList.addByOrder(hero4);
 
+        //从尾到头打印单链表
+        SigleLinkedList.reversePrint(sigleLinkedList.getHead());
 
-
+/*
         //反转
         System.out.println("反转前~~~");
         sigleLinkedList.list();
@@ -29,7 +33,7 @@ public class SigleLinkedListDemo {
         int index =1;
         HeroNode lastIndexNode = SigleLinkedList.findLastIndexNode(sigleLinkedList.getHead(), index);
         System.out.printf("倒数第%d个节点是：%s",index,lastIndexNode);
-/*
+
         sigleLinkedList.list();
         System.out.println("删除节点~~~");
         sigleLinkedList.del(4);
@@ -210,7 +214,24 @@ class SigleLinkedList{
         }
 
         head.next=newHead.next;
-        head=newHead;//为啥这种写法不行？
+        //为啥下面这种写法不行？
+        // 画图理解，1）方法参数值传递机制；2）head是方法栈的局部变量，不是单链表的成员变量head；
+        //head=newHead;
+    }
+    //从头到尾打印单链表
+    public static void reversePrint(HeroNode head){
+        if (head.next == null){
+            return;
+        }
+        Stack<HeroNode> stack = new Stack<>();
+        HeroNode temp = head.next;
+        while (temp != null){
+            stack.push(temp);
+            temp=temp.next;
+        }
+        while (stack.size()>0){
+            System.out.println(stack.pop());
+        }
     }
 }
 class HeroNode{
