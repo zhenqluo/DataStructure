@@ -1,4 +1,4 @@
-package com.chapter3;
+package com.chapter3.sparsearray;
 
 import java.io.*;
 import java.util.ArrayList;
